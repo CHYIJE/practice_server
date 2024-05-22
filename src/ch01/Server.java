@@ -27,7 +27,7 @@ public class Server {
 			// 연결 되어야 실행 흐름이 내려온다.
 			System.out.println("Clinet commected....");
 			// 대상 - 소켓 --> 입력 스트림을 가져온다.
-			while(true) {
+//			while(true) {
 				InputStream inpub = socket.getInputStream();
 				BufferedReader reader = new BufferedReader(new InputStreamReader(inpub));
 				String message = reader.readLine(); // 한줄 단위로 데이터를 읽어라 (문자 기반 )
@@ -35,7 +35,7 @@ public class Server {
 				
 				
 				socket.close();
-			}
+//			}
 			// 기본 소켓은 클라이언트가 연결 되어야 생성 된다.
 			
 		} catch (Exception e) {

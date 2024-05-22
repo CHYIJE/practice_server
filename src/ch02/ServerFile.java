@@ -31,7 +31,7 @@ public class ServerFile {
 
 			// 데이터를 전달 받기 위해서는 뭐가 필요하다? ---> 스트림이 필요하다.
 			InputStream input = socket.getInputStream();
-			// 문자 기반 스트림
+			// 문자 기반 스트림 -> 기능의 확장
 			BufferedReader reader = new BufferedReader(new InputStreamReader(input));
 
 			// 실제 데이터를 읽는 행위가 필요하다.

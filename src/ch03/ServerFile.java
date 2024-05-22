@@ -21,7 +21,7 @@ public class ServerFile {
 
 		ServerSocket serverSocket = null;
 		Socket socket = null;
-		
+
 		try {
 
 			serverSocket = new ServerSocket(5001);
@@ -36,24 +36,27 @@ public class ServerFile {
 			BufferedReader reader = new BufferedReader(new InputStreamReader(input));
 
 			// 1. 클라이언트에서 먼저 보낸 데이터를 읽는다.
-			// 대상은 소켓이다. (output stream) 작업
+			// 실제 데이터를 읽는 행위가 필요 하다.
+			String message = reader.readLine();
+			System.out.println("클라이언트 측 메세지 전달 받음 : " + message);
+
+			// 2. 클라이언트 측으로 데이터를 보낸다.
+			// 대상은 소켓이다. ( output stream) 작업
 			PrintWriter writer = new PrintWriter(socket.getOutputStream(), true); // auto flush
 			writer.println("난 서버야, 클라이언트 반가워"); // 줄바꿈 포함 메서드 안녕 ---> 안녕\n
-			
-			
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			
-			if(socket != null) {
+
+			if (socket != null) {
 				try {
 					socket.close();
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
 			}
-			
+
 			if (serverSocket != null) {
 				try {
 					serverSocket.close();
