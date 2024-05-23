@@ -36,6 +36,8 @@ public class MultiThreadServer {
 			// 스레드를 시작합니다.
 			startReadThread(readerStream);
 			startWriterThread(writerStream, keyboardReader);
+
+		
 			
 			System.out.println("main 스레드 작업 완료...");
 			
@@ -62,8 +64,7 @@ public class MultiThreadServer {
 			}
 		});
 		readThread.start(); // 스레드 실행 -> run() 메서드 진행
-		// 메인 스레드 대기 처리 --> join() --> 고민 --> 2번의 반복 될듯??
-		waitForThread(readThread);
+		
 	}
 
 	// 서버측에서 --> 클라이언트로 데이터를 보내는 기능
@@ -81,8 +82,7 @@ public class MultiThreadServer {
 			}
 		});
 		writeThread.start();
-		// 메인 스레드 대기
-		waitForThread(writeThread);
+		
 	}
 
 	// 워커 스레드가 종료될 때까지 가다리는 메서드
