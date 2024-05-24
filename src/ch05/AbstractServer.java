@@ -43,6 +43,9 @@ public abstract class AbstractServer {
 			
 		} catch (IOException e) {
 			e.printStackTrace();
+		} finally {
+			System.out.println("cleanup() 호출 확인");
+			cleanup();
 		}
 	}
 	
@@ -71,8 +74,8 @@ public abstract class AbstractServer {
 		try {
 			readThread.join();
 			wrThread.join();
+			// main 스레드 잠깐 기다려 
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -82,7 +85,8 @@ public abstract class AbstractServer {
 		return new Thread(() -> {
 			try {
 				String msg;
-				// 
+				// scnnner.nextLine();  <--- 무한 대기 (사용자가 콘솔에 값 입력 까지 대기) 
+				// 코드 ....  
 				while((msg = readerStream.readLine()) != null) {
 					// 서버측 콘솔에 출력
 					System.out.println("client 측 msg : " + msg);
@@ -98,7 +102,9 @@ public abstract class AbstractServer {
 		return new Thread(() -> {
 			try {
 				String msg;
+				// 서버측 키보드에서 데이터를 한줄라인으로 읽음
 				while((msg = keyboardReader.readLine()) != null) {
+				// 클라이언트와 연결된 소켓에다가 데이터를 보냄 
 				writerStream.println(msg);
 				writerStream.flush();
 				}
